@@ -1,0 +1,7 @@
+@tailwind components;
+@tailwind utilities;
+@tailwind base;
+
+body {
+	@apply bg-slate-900;
+}
