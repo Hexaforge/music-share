@@ -9,20 +9,18 @@ import { getAuth } from "firebase/auth";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-	apiKey: "AIzaSyCwrwy4RTVouz-I1WRgoOEfvA-wv7ndHFU",
-	authDomain: "musicash-6cdeb.firebaseapp.com",
-	databaseURL:
-		"https://musicash-6cdeb-default-rtdb.europe-west1.firebasedatabase.app",
-	projectId: "musicash-6cdeb",
-	storageBucket: "musicash-6cdeb.appspot.com",
-	messagingSenderId: "824474383774",
-	appId: "1:824474383774:web:62af15dea98936dcf8928f",
+	apiKey: "AIzaSyDoSP-TIg_kvEPcBi4sydg9ttefvckFUIU",
+	authDomain: "musicshare2-aa00f.firebaseapp.com",
+	projectId: "musicshare2-aa00f",
+	storageBucket: "musicshare2-aa00f.appspot.com",
+	messagingSenderId: "902499158091",
+	appId: "1:902499158091:web:b4bd97a2fe4d38ca93e5ce",
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-export const storage = getStorage(app, "gs://musicash-6cdeb.appspot.com");
+export const storage = getStorage(app, "gs://" + app.options.storageBucket);
 
 export const database = getDatabase(app);
 
