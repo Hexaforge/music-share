@@ -1,11 +1,18 @@
-import React, { useState } from "react";
-import { storage } from "./firebase";
+import React, { useEffect, useState } from "react";
+import { auth, storage } from "./firebase";
 import { database } from "./firebase";
 import { ref as storeRef, uploadBytes } from "firebase/storage";
 import { set, ref as databaseRef } from "firebase/database";
+import { signInAnonymously } from "firebase/auth";
 
 const App = () => {
 	const [loading, setLoading] = useState(false);
+	const [userId, setUserId] = useState("");
+	useEffect(() => {
+		signInAnonymously(auth).then(({ user: { uid } }) => {
+			setUserId(uid);
+		});
+	}, []);
 	const uploadFile = (file: File) => {
 		setLoading(true);
 		const id = Math.random().toString(32).slice(2);
@@ -22,8 +29,9 @@ const App = () => {
 		});
 		set(databaseRef(database, "sessions/" + id), {
 			currentTimestamp: 0,
+			creator: userId,
 			isPlaying: false,
-		}).then((data) => {
+		}).then(() => {
 			dbDone = true;
 			if (storeDone) {
 				setLoading(false);
@@ -32,10 +40,12 @@ const App = () => {
 		});
 	};
 	return (
-		<div className="bg-slate-900 w-screen h-screen flex justify-center items-center p-32">
+		<div className="bg-slate-900 w-screen h-screen flex justify-center items-center p-8 md:p-32">
 			<div className="w-full text-white text-3xl file:hidden bg-slate-800 border-dashed border-2 border-slate-500 flex justify-center items-center">
 				{loading ? (
-					<div className="p-36 animate-spin text-9xl text-center">◡</div>
+					<div className="p-8 md:p-36 animate-spin text-9xl text-center">
+						<p className="h-1/12 w-1/12">◡</p>
+					</div>
 				) : (
 					<input
 						onChange={({ target: { files } }) => {
@@ -46,7 +56,7 @@ const App = () => {
 						title="Upload a file"
 						itemType="audio/*"
 						accept="audio/*"
-						className="file:hidden p-36 outline-none"
+						className="file:hidden p-8 md:p-36 outline-none"
 					/>
 				)}
 			</div>
