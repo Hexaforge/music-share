@@ -11,6 +11,8 @@ import { getAuth } from "firebase/auth";
 const firebaseConfig = {
 	apiKey: "AIzaSyDoSP-TIg_kvEPcBi4sydg9ttefvckFUIU",
 	authDomain: "musicshare2-aa00f.firebaseapp.com",
+	databaseURL:
+		"https://musicshare2-aa00f-default-rtdb.europe-west1.firebasedatabase.app",
 	projectId: "musicshare2-aa00f",
 	storageBucket: "musicshare2-aa00f.appspot.com",
 	messagingSenderId: "902499158091",
