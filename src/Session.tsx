@@ -18,6 +18,7 @@ const Session = () => {
 		);
 	}, [isOwner]);
 	useEffect(() => {
+		audioPlayer.current?.load();
 		let user = "";
 		signInAnonymously(auth).then(({ user: { uid } }) => {
 			user = uid;
@@ -44,7 +45,6 @@ const Session = () => {
 				loaded = true;
 			}
 			if (audioPlayer.current) {
-				audioPlayer.current.load();
 				audioPlayer.current.currentTime = sessionData.currentTimestamp || 0;
 
 				if (sessionData.isPlaying) {
